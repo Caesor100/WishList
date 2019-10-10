@@ -17,7 +17,9 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(QtGui.QIcon('img/list.png'))
 
         self.mysql = MySQLDB('wish_list_db')
-        self.connect_db()
+        self.mysql.connect()
+        self.mysql.create_db()
+        self.mysql.create_table()
 
         self.centralWidget = QtWidgets.QWidget(MainWindow)
         self.centralWidget.resize(480, 480)
@@ -48,12 +50,6 @@ class MainWindow(QMainWindow):
 
         self.setStyleSheet(style)
         self.update_table()
-
-    def connect_db(self):
-        """Подключение к базе данных."""
-        self.mysql.connect()
-        self.mysql.create_db()
-        self.mysql.create_table()
 
     def add_item(self):
         """Добавить элемент в таблицу wish list."""
